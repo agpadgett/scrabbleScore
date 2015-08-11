@@ -1,10 +1,35 @@
 import java.io.Console;
 import java.util.HashMap;
+import static spark.Spark.*;
+import spark.template.velocity.VelocityTemplateEngine;
+import spark.ModelAndView;
+
 
 public class ScrabbleScore{
-    public static void main (String[] args) {}
+    public static void main (String[] args) {
+        //String layout ="templates/index.vtl";
+        get("/", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
 
-    public Integer testMethod(String userInput) {
+            return new ModelAndView(model, "templates/index.vtl");
+
+        }, new VelocityTemplateEngine());
+
+
+        get("/results", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            String userWord = request.queryParams("scrabbleWord");
+            Integer wordScore = wordValue(userWord);
+
+            model.put("scrabbleWord", userWord);
+            model.put("wordScore", wordScore);
+
+            return new ModelAndView(model, "templates/results.vtl");
+        }, new VelocityTemplateEngine());
+
+    }
+
+    public static Integer wordValue(String userInput) {
         char[] userInputArray = userInput.toCharArray();
 
         Integer userInputLength = userInputArray.length;
@@ -42,6 +67,9 @@ public class ScrabbleScore{
          Integer letterValue = letterMap.get(userInputArray[i]);
          sum = sum + letterValue;
     }
+    System.out.println("Here is your Scrabble Score " + sum + ".");
+
     return sum;
+
     }
 }
