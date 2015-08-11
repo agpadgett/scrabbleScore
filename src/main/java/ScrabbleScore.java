@@ -4,7 +4,11 @@ import java.util.HashMap;
 public class ScrabbleScore{
     public static void main (String[] args) {}
 
-    public Integer testMethod(Character letter) {
+    public Integer testMethod(String userInput) {
+        char[] userInputArray = userInput.toCharArray();
+
+        Integer userInputLength = userInputArray.length;
+
         HashMap<Character, Integer> letterMap = new HashMap<Character, Integer>();
         letterMap.put('a', 1);
         letterMap.put('e', 1);
@@ -31,8 +35,13 @@ public class ScrabbleScore{
         letterMap.put('x', 8);
         letterMap.put('q', 10);
         letterMap.put('z', 10);
-        return letterMap.get(letter);
+
+        Integer sum = 0;
+    for (int i= 0; i < userInputLength; i++){
+
+         Integer letterValue = letterMap.get(userInputArray[i]);
+         sum = sum + letterValue;
     }
-
-
+    return sum;
+    }
 }

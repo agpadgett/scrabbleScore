@@ -7,14 +7,14 @@ public class ScrabbleScoreTest{
     public void ScrabbleScore_returnAScrabbleScoreForALetter_1() {
     ScrabbleScore ScrabbleScoreTest = new ScrabbleScore();
     Integer score = 1;
-    assertEquals(score, ScrabbleScoreTest.testMethod('a'));
+    assertEquals(score, ScrabbleScoreTest.testMethod("a"));
 
     }
 
     @Test
     public void ScrabbleScore_returnScoreForAString_Interger() {
     ScrabbleScore ScrabbleScoreTest = new ScrabbleScore();
-    Integer score = 4
+    Integer score = 4;
     assertEquals(score, ScrabbleScoreTest.testMethod("and"));
     }
 
